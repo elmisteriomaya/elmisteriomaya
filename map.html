@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>El Misterio Maya - Mapa</title>
+
+    <link
+        rel="stylesheet"
+        href="map.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="map-container">
+
+        <!-- ENCABEZADO -->
+
+        <header class="map-header">
+
+            <div>
+
+                <div class="game-title">
+                    🛕 EL MISTERIO MAYA
+                </div>
+
+                <div
+                    id="playerName"
+                    class="player-name"
+                >
+                    Guerrero
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <span>
+                    PROGRESO
+                </span>
+
+                <strong id="progressText">
+                    1 / 5
+                </strong>
+
+            </div>
+
+        </header>
+
+
+        <!-- TÍTULO -->
+
+        <section class="map-title">
+
+            <span>
+                🗺️
+            </span>
+
+            <div>
+
+                <h1>
+                    EL CAMINO MAYA
+                </h1>
+
+                <p>
+                    Descubre los secretos
+                    de una antigua civilización.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAPA -->
+
+        <section
+            id="levelMap"
+            class="level-map"
+        >
+        </section>
+
+
+        <!-- BOTÓN -->
+
+        <button
+            id="backButton"
+            class="back-button"
+        >
+            ← VOLVER
+        </button>
+
+<!-- ========================================
+     ACCIONES DEL JUGADOR
+======================================== -->
+
+<div class="map-actions">
+
+    <button
+        id="statisticsButton"
+        class="map-action-button"
+        type="button"
+    >
+        📊 ESTADÍSTICAS
+    </button>
+
+
+    <button
+        id="resetButton"
+        class="map-action-button reset-button"
+        type="button"
+    >
+        🔄 REINICIAR JUEGO
+    </button>
+
+</div>
+
+
+
+    </main>
+
+
+    <script src="js/levels.js"></script>
+
+    <script src="js/storage.js"></script>
+
+    <script src="map.js"></script>
+
+</body>
+
+</html>

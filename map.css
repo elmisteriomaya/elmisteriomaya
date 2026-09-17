@@ -1,0 +1,723 @@
+/* ========================================
+   EL MISTERIO MAYA
+   MAPA DE NIVELES
+======================================== */
+
+
+/* ========================================
+   GENERAL
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #25351e,
+            #10150d 65%,
+            #090b07
+        );
+
+    color: #eee;
+
+}
+
+
+/* ========================================
+   CONTENEDOR
+======================================== */
+
+.map-container {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    padding:
+        20px
+        20px
+        40px;
+
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.map-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        rgba(213, 185, 95, 0.3);
+
+}
+
+
+.game-title {
+
+    color: #d5b95f;
+
+    font-weight: bold;
+
+    font-size: 20px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.player-name {
+
+    margin-top: 5px;
+
+    color: #aaa987;
+
+    font-size: 13px;
+
+}
+
+
+.progress {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+}
+
+
+.progress span {
+
+    font-size: 10px;
+
+    color: #aaa987;
+
+    letter-spacing: 1px;
+
+}
+
+
+.progress strong {
+
+    color: #d5b95f;
+
+    margin-top: 4px;
+
+}
+
+
+/* ========================================
+   TÍTULO
+======================================== */
+
+.map-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin:
+        35px
+        0
+        20px;
+
+}
+
+
+.map-title > span {
+
+    font-size: 48px;
+
+}
+
+
+.map-title h1 {
+
+    margin: 0;
+
+    color: #d5b95f;
+
+    font-size: 28px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.map-title p {
+
+    margin-top: 8px;
+
+    color: #aaa987;
+
+}
+
+
+/* ========================================
+   MAPA
+======================================== */
+
+.level-map {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 0;
+
+    padding:
+        20px
+        0
+        40px;
+
+}
+
+
+/* ========================================
+   CONECTOR
+======================================== */
+
+.level-connector {
+
+    width: 5px;
+
+    height: 65px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #8e7638,
+            #d5b95f,
+            #8e7638
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(213, 185, 95, 0.4);
+
+}
+
+
+/* ========================================
+   NIVEL
+======================================== */
+
+.level-node {
+
+    position: relative;
+
+    width: min(
+        90%,
+        520px
+    );
+
+    min-height: 120px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    border:
+        2px solid
+        #5e512d;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(54, 59, 39, 0.95),
+            rgba(27, 31, 20, 0.95)
+        );
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.4);
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+}
+
+
+/* ========================================
+   NIVEL DESBLOQUEADO
+======================================== */
+
+.level-node.unlocked {
+
+    cursor: pointer;
+
+    border-color:
+        #d5b95f;
+
+}
+
+
+.level-node.unlocked:hover {
+
+    transform:
+        scale(1.03);
+
+    border-color:
+        #ffe98a;
+
+    box-shadow:
+        0 0 25px
+        rgba(213,185,95,0.3);
+
+}
+
+
+/* ========================================
+   NIVEL ACTUAL
+======================================== */
+
+.level-node.current {
+
+    border-color:
+        #ffe98a;
+
+    box-shadow:
+        0 0 20px
+        rgba(213,185,95,0.25);
+
+}
+
+
+/* ========================================
+   NIVEL BLOQUEADO
+======================================== */
+
+.level-node.locked {
+
+    opacity: 0.45;
+
+    filter:
+        grayscale(0.7);
+
+}
+
+
+/* ========================================
+   ICONO
+======================================== */
+
+.level-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #4b452c,
+            #211f15
+        );
+
+    border:
+        2px solid
+        #8e7638;
+
+    font-size: 38px;
+
+}
+
+
+/* ========================================
+   INFORMACIÓN
+======================================== */
+
+.level-info {
+
+    flex: 1;
+
+}
+
+
+.level-number {
+
+    color: #aaa987;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.level-name {
+
+    margin-top: 4px;
+
+    color: #eee;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+}
+
+
+.level-description {
+
+    margin-top: 5px;
+
+    color: #aaa987;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+}
+
+
+/* ========================================
+   ESTADO
+======================================== */
+
+.level-status {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 70px;
+
+    font-size: 24px;
+
+}
+
+
+/* ========================================
+   ESTRELLAS
+======================================== */
+
+.level-stars {
+
+    margin-top: 8px;
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ========================================
+   BOTÓN VOLVER
+======================================== */
+
+.back-button {
+
+    display: block;
+
+    margin:
+        10px
+        auto
+        0;
+
+    padding:
+        12px
+        30px;
+
+    border:
+        1px solid
+        #806d36;
+
+    border-radius: 8px;
+
+    background:
+        #252719;
+
+    color: #d5b95f;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.back-button:hover {
+
+    background:
+        #353822;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (
+    max-width: 600px
+) {
+
+    .map-container {
+
+        padding:
+            15px
+            12px
+            30px;
+
+    }
+
+
+    .game-title {
+
+        font-size: 15px;
+
+    }
+
+
+    .map-title {
+
+        margin-top: 25px;
+
+    }
+
+
+    .map-title > span {
+
+        font-size: 38px;
+
+    }
+
+
+    .map-title h1 {
+
+        font-size: 21px;
+
+    }
+
+
+    .map-title p {
+
+        font-size: 12px;
+
+    }
+
+
+    .level-node {
+
+        width: 100%;
+
+        min-height: 105px;
+
+        gap: 12px;
+
+        padding: 14px;
+
+    }
+
+
+    .level-icon {
+
+        width: 58px;
+
+        height: 58px;
+
+        font-size: 29px;
+
+    }
+
+
+    .level-name {
+
+        font-size: 17px;
+
+    }
+
+
+    .level-description {
+
+        font-size: 11px;
+
+    }
+
+
+    .level-status {
+
+        min-width: 35px;
+
+    }
+
+
+    .level-stars {
+
+        font-size: 13px;
+
+    }
+
+}
+
+/* ========================================
+   MEJOR PUNTUACIÓN
+======================================== */
+
+.level-high-score {
+
+    margin-top: 5px;
+
+    color: #d5b95f;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+}
+
+/* ========================================
+   ACCIONES DEL JUGADOR
+======================================== */
+
+.map-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 20px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.map-action-button {
+
+    min-width: 180px;
+
+    padding: 13px 20px;
+
+    border:
+        1px solid
+        #8e7638;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #343a31,
+            #232821
+        );
+
+    color: #d5b95f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+}
+
+
+.map-action-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #d5b95f;
+
+    box-shadow:
+        0 5px 20px
+        rgba(213,185,95,0.18);
+
+}
+
+
+/* ========================================
+   BOTÓN REINICIAR
+======================================== */
+
+.reset-button {
+
+    border-color:
+        #705b35;
+
+    color:
+        #c5b994;
+
+}
+
+
+.reset-button:hover {
+
+    border-color:
+        #b99b4b;
+
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>El Misterio Maya</title>
+
+    <link rel="stylesheet" href="game.css">
+
+</head>
+
+<body>
+
+<main class="game-container">
+
+
+    <!-- HEADER -->
+
+    <header class="game-header">
+
+        <div class="game-logo">
+
+            <div class="sun">
+                ☀
+            </div>
+
+            <div>
+
+                <h1>
+                    EL MISTERIO MAYA
+                </h1>
+
+                <p>
+                    La aventura comienza
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="player-name">
+
+            👤
+            <span id="playerName">
+                Guerrero
+            </span>
+
+        </div>
+
+
+        <button
+            id="restartButton"
+            class="restart-button"
+        >
+            🔄
+        </button>
+
+    </header>
+
+
+    <!-- ESTADÍSTICAS -->
+
+    <section class="level-info">
+
+        <div class="info-box">
+
+            <span>🏆</span>
+
+            <div>
+
+                <small>
+                    PUNTOS
+                </small>
+
+                <strong id="score">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <span>🎯</span>
+
+            <div>
+
+                <small>
+                    OBJETIVO
+                </small>
+
+                <strong id="target">
+                    500
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <span>🔢</span>
+
+            <div>
+
+                <small>
+                    MOVIMIENTOS
+                </small>
+
+                <strong id="moves">
+                    20
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISIÓN -->
+
+    <section class="mission">
+
+        <div>
+            🛕
+        </div>
+
+        <div>
+
+            <strong>
+                NIVEL 1 — LA SELVA
+            </strong>
+
+            <p>
+                Consigue 500 puntos para avanzar.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- TABLERO -->
+
+    <section class="board-container">
+
+        <div
+            id="gameBoard"
+            class="game-board"
+        ></div>
+
+    </section>
+
+
+    <!-- MENSAJE -->
+
+    <p
+        id="message"
+        class="message"
+    >
+        Combina 3 o más símbolos iguales.
+    </p>
+
+
+    <!-- LEYENDA -->
+
+    <section class="legend">
+
+        <div>
+            <span>💎</span>
+            Jade
+        </div>
+
+        <div>
+            <span>🌽</span>
+            Maíz
+        </div>
+
+        <div>
+            <span>💧</span>
+            Agua
+        </div>
+
+        <div>
+            <span>🔥</span>
+            Fuego
+        </div>
+
+        <div>
+            <span>🪶</span>
+            Pluma
+        </div>
+
+        <div>
+            <span>🗿</span>
+            Glifo
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         PANTALLA FINAL
+    =============================== -->
+
+    <div
+        id="gameOver"
+        class="overlay hidden"
+    >
+
+<!-- ==========================================
+     ESCENARIO DE INGENIERÍA SOCIAL
+========================================== -->
+
+<div
+    id="adOverlay"
+    class="ad-overlay hidden"
+>
+
+    <div class="ad-card">
+
+        <!-- Tipo de escenario -->
+        <div
+            id="scenarioLabel"
+            class="ad-label"
+        >
+            ⚠️ SITUACIÓN DE SEGURIDAD
+        </div>
+
+        <!-- Icono -->
+        <div
+            id="scenarioIcon"
+            class="ad-icon"
+        >
+            ⚠️
+        </div>
+
+        <!-- Título -->
+        <h2 id="scenarioTitle">
+            ACTIVIDAD INUSUAL DETECTADA
+        </h2>
+
+        <!-- Mensaje -->
+        <div
+            id="scenarioMessage"
+            class="scenario-message"
+        >
+            Hemos detectado actividad inusual
+            en tu cuenta.
+        </div>
+
+        <!-- Acción del escenario -->
+        <button
+            id="scenarioAction"
+            class="scenario-action"
+        >
+            VERIFICAR MI CUENTA
+        </button>
+
+        <!-- Opción segura -->
+        <button
+            id="scenarioSafeButton"
+            class="scenario-safe-button"
+        >
+            CERRAR
+        </button>
+
+        <!-- Resultado -->
+        <div
+            id="scenarioResult"
+            class="scenario-result hidden"
+        >
+        </div>
+
+        <!-- Recomendación -->
+        <div
+            id="scenarioRecommendation"
+            class="scenario-recommendation hidden"
+        >
+        </div>
+
+        <!-- Cuenta regresiva -->
+        <div
+            id="adCountdown"
+            class="ad-countdown hidden"
+        >
+            5
+        </div>
+
+        <!-- Continuar -->
+        <button
+            id="adCloseButton"
+            class="ad-close-button hidden"
+        >
+            CONTINUAR
+        </button>
+
+    </div>
+
+</div>
+
+
+
+    <div class="result-card">
+
+        <div
+            id="resultSymbol"
+            class="result-symbol"
+            >
+            🛕
+        </div>
+
+
+        <h2 id="resultTitle">
+            ¡NIVEL COMPLETADO!
+        </h2>
+
+
+            <p id="resultMessage">
+                Has descubierto un nuevo fragmento.
+            </p>
+
+
+            <div class="result-score">
+
+                <span>
+                    PUNTUACIÓN
+                </span>
+
+                <strong id="finalScore">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div
+                id="stars"
+                class="stars"
+            >
+                ⭐⭐⭐
+            </div>
+
+
+            <button
+                id="continueButton"
+            >
+                CONTINUAR
+            </button>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+<script src="js/levels.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/ads.js"></script>
+<script src="game.js"></script>
+
+</body>
+
+</html>

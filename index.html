@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        El Misterio Maya - Pruebas
+    </title>
+
+    <!--
+        ====================================================
+        LOGIN TEMPORAL DE PRUEBAS
+        ====================================================
+
+        Esta página es una versión temporal del login.
+
+        Se utiliza únicamente para pruebas durante
+        el desarrollo de "El Misterio Maya".
+
+        En esta versión NO utilizaremos:
+
+        - Contraseña
+        - Crear cuenta
+        - Autenticación real
+
+        El jugador únicamente ingresará su nombre.
+
+        IMPORTANTE:
+
+        index.html contiene el login original.
+
+        NO eliminamos ni modificamos ese archivo.
+
+        Cuando terminemos las pruebas podremos volver
+        a implementar el sistema de cuentas.
+        ====================================================
+    -->
+
+
+    <!-- HOJA DE ESTILOS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+<!-- ========================================
+     AVISO DE SEGURIDAD
+======================================== -->
+
+<div id="securityNotice" class="security-overlay">
+
+    <div class="security-card">
+
+        <div class="security-icon">
+            🛡️
+        </div>
+
+        <h2>
+            AVISO DE SEGURIDAD
+        </h2>
+
+        <p class="security-intro">
+            Antes de comenzar
+        </p>
+
+        <p class="security-question">
+            ¿Confiarías en cualquier enlace que recibas?
+        </p>
+
+
+        <!-- IMAGEN EDUCATIVA -->
+
+        <img
+            src="img/aviso-enlaces.png"
+            alt="Ejemplo educativo sobre enlaces sospechosos"
+            class="security-image"
+        >
+
+
+        <div class="security-tips">
+
+            <p>
+                🔎 Verifica siempre el <strong>remitente</strong>.
+            </p>
+
+            <p>
+                🔗 Revisa cuidadosamente la
+                <strong>dirección del enlace</strong>.
+            </p>
+
+            <p>
+                ⚠️ Desconfía de mensajes que generen
+                <strong>urgencia o presión</strong>.
+            </p>
+
+            <p>
+                🔐 Nunca proporciones
+                <strong>contraseñas o información sensible</strong>.
+            </p>
+
+        </div>
+
+
+        <p class="security-final">
+            No hagas clic inmediatamente.
+            <br>
+            <strong>Piensa antes de interactuar.</strong>
+        </p>
+
+
+        <button
+            id="securityContinue"
+            class="security-button"
+            type="button"
+        >
+            🛡️ ENTENDIDO
+        </button>
+
+    </div>
+
+</div>
+
+    <main class="game-container">
+
+
+        <!--
+            ====================================================
+            SÍMBOLO MAYA
+            ====================================================
+        -->
+
+        <div class="maya-symbol">
+            ☀
+        </div>
+
+
+        <!--
+            ====================================================
+            LOGIN TEMPORAL
+            ====================================================
+        -->
+
+        <section class="login-box">
+
+
+            <!-- TÍTULO -->
+
+            <h1>
+                EL MISTERIO
+            </h1>
+
+
+            <h2>
+                MAYA
+            </h2>
+
+
+            <p class="subtitle">
+
+                Descubre los secretos
+                de una antigua civilización
+
+            </p>
+
+
+            <div class="divider"></div>
+
+
+            <!--
+                ====================================================
+                NOMBRE DEL JUGADOR
+                ====================================================
+
+                TEMPORALMENTE SOLO PEDIMOS EL NOMBRE.
+
+                El ID "username" se mantiene igual que en
+                el login original para que podamos reutilizar
+                login.js sin tener que cambiar toda la lógica.
+                ====================================================
+            -->
+
+            <div class="input-group">
+
+
+                <label
+                    for="username"
+                >
+                    JUGADOR
+                </label>
+
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Ingresa tu nombre"
+                    autocomplete="username"
+                    maxlength="20"
+                >
+
+
+            </div>
+
+
+            <!--
+                ====================================================
+                CONTRASEÑA DESACTIVADA TEMPORALMENTE
+                ====================================================
+
+                NO ELIMINAMOS EL CÓDIGO ORIGINAL.
+
+                Lo dejamos comentado para recordar que
+                posteriormente podremos volver a utilizarlo.
+
+                Código original:
+
+                <div class="input-group">
+
+                    <label for="password">
+                        CONTRASEÑA
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+            -->
+
+
+            <!--
+                ====================================================
+                BOTÓN INICIAR PARTIDA
+                ====================================================
+            -->
+
+            <button
+                id="loginButton"
+                class="main-button"
+                type="button"
+            >
+
+                ⚔ INICIAR PARTIDA
+
+            </button>
+
+
+            <!--
+                ====================================================
+                CREAR CUENTA DESACTIVADO TEMPORALMENTE
+                ====================================================
+
+                Posteriormente podremos volver a implementar:
+
+                - Registro
+                - Contraseña
+                - Inicio de sesión
+                - Recuperación de contraseña
+
+                Código original:
+
+                <button
+                    id="registerButton"
+                    class="register-button"
+                    type="button"
+                >
+                    CREAR CUENTA
+                </button>
+
+            -->
+
+
+            <!--
+                ====================================================
+                MENSAJE
+                ====================================================
+            -->
+
+            <p
+                id="message"
+                aria-live="polite"
+            ></p>
+
+
+        </section>
+
+
+        <!--
+            ====================================================
+            FOOTER
+            ====================================================
+        -->
+
+        <footer class="footer">
+
+            ✦ El conocimiento es el camino hacia el misterio ✦
+
+        </footer>
+
+
+    </main>
+
+
+    <!--
+        ====================================================
+        JAVASCRIPT
+        ====================================================
+
+        Utilizamos temporalmente el mismo login.js.
+
+        Como conservamos los IDs:
+
+            username
+            loginButton
+            message
+
+        podremos reutilizar la lógica existente.
+        ====================================================
+    -->
+
+    <script src="login.js"></script>
+
+
+</body>
+
+</html>
