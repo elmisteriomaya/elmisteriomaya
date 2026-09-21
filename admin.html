@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Panel de Administrador - El Misterio Maya</title>
+
+
+    <!--
+        ====================================================
+        PANEL DE ADMINISTRADOR - VERSIÓN DE PRUEBAS
+        ====================================================
+
+        Esta página muestra estadísticas de TODOS los
+        jugadores (agrupando lo guardado en
+        "mayaSecurityResults") en lugar de las estadísticas
+        de un solo jugador, como hace statistics.html.
+
+        IMPORTANTE:
+
+        Por ahora los datos se leen del localStorage del
+        propio navegador, porque todavía no existe la base
+        de datos ni el API. Es decir: esta es una simulación
+        local para poder construir y probar el panel.
+
+        Cuando conectemos Azure SQL + API, únicamente
+        cambiaremos la forma en la que se obtienen los datos
+        dentro de admin.js (la función getSecurityResults),
+        el resto del panel no debería necesitar cambios.
+
+        ACCESO:
+
+        "Ser admin" viene de la columna EsAdmin de la
+        tabla Jugadores. Al iniciar sesión, POST /api/login
+        devuelve esAdmin, y login.js lo guarda en
+        localStorage como "mayaEsAdmin". isAdminUser(),
+        en sesion.js, lee ese valor.
+
+        Solo "maestro", "evcarrillo" y "rmerida" tienen
+        EsAdmin = 1 (ver actualizacion_admin.sql). Si el
+        jugador actual no es admin, se muestra un mensaje
+        de acceso restringido en vez del panel.
+        ====================================================
+    -->
+
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================
+     ACCESO RESTRINGIDO
+======================================== -->
+
+<div
+    id="adminGate"
+    class="admin-gate hidden"
+>
+
+    <div class="admin-gate-card">
+
+        <div class="admin-gate-icon">
+            🛡️
+        </div>
+
+        <h2>
+            ACCESO RESTRINGIDO
+        </h2>
+
+        <p class="admin-gate-text">
+            Esta sección es solo para
+            administradores del proyecto.
+        </p>
+
+        <button
+            id="adminGateBackButton"
+            class="back-button"
+            type="button"
+        >
+            ← VOLVER AL MAPA
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================
+     PANEL PRINCIPAL
+======================================== -->
+
+<main
+    id="adminDashboard"
+    class="admin-container"
+>
+
+
+    <!-- ENCABEZADO -->
+
+    <header class="admin-header">
+
+        <div class="admin-logo">
+
+            <div class="sun">
+                ☀
+            </div>
+
+            <div>
+
+                <h1>
+                    EL MISTERIO MAYA
+                </h1>
+
+                <p>
+                    Panel de administrador
+                </p>
+
+            </div>
+
+        </div>
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+            type="button"
+        >
+            🚪 SALIR
+        </button>
+
+    </header>
+
+
+    <!-- TARJETAS DE RESUMEN -->
+
+    <section
+        id="kpiGrid"
+        class="kpi-grid"
+    >
+
+        <div class="kpi-card">
+
+            <span class="kpi-icon">
+                👥
+            </span>
+
+            <div>
+
+                <small>
+                    JUGADORES
+                </small>
+
+                <strong id="kpiPlayers">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="kpi-card">
+
+            <span class="kpi-icon">
+                🎯
+            </span>
+
+            <div>
+
+                <small>
+                    ESCENARIOS EVALUADOS
+                </small>
+
+                <strong id="kpiScenarios">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="kpi-card">
+
+            <span class="kpi-icon">
+                ⚠️
+            </span>
+
+            <div>
+
+                <small>
+                    INTERACCIONES RIESGOSAS
+                </small>
+
+                <strong id="kpiCompromised">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="kpi-card">
+
+            <span class="kpi-icon">
+                📈
+            </span>
+
+            <div>
+
+                <small>
+                    SUSCEPTIBILIDAD GLOBAL
+                </small>
+
+                <strong id="kpiSusceptibility">
+                    0%
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GRÁFICAS -->
+
+    <section class="charts-grid">
+
+        <div class="chart-card">
+
+            <div class="chart-card-header">
+
+                <h2>
+                    RESULTADOS POR TÉCNICA DE ATAQUE
+                </h2>
+
+                <p>
+                    Detectado vs. interacción riesgosa
+                </p>
+
+            </div>
+
+            <div class="chart-canvas-wrapper">
+
+                <canvas id="techniquesChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <div class="chart-card chart-card-small">
+
+            <div class="chart-card-header">
+
+                <h2>
+                    TÉCNICAS MÁS FRECUENTES
+                </h2>
+
+                <p>
+                    Escenarios presentados por tipo
+                </p>
+
+            </div>
+
+            <div class="chart-canvas-wrapper">
+
+                <canvas id="categoriesChart"></canvas>
+
+            </div>
+
+            <div
+                id="categoriesLegend"
+                class="categories-legend"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TABLA DE INTERACCIONES RIESGOSAS -->
+
+    <section class="report-section">
+
+        <div class="section-title">
+
+            <span>
+                📋
+            </span>
+
+            <h2>
+                INTERACCIONES RIESGOSAS RECIENTES
+            </h2>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>JUGADOR</th>
+                        <th>FECHA</th>
+                        <th>UBICACIÓN</th>
+                        <th>TÉCNICA</th>
+                        <th>NIVEL</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="compromisedTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <p
+            id="tableEmptyMessage"
+            class="no-results hidden"
+        >
+            Todavía no hay interacciones riesgosas registradas.
+        </p>
+
+        <div
+            id="tablePagination"
+            class="table-pagination"
+        ></div>
+
+    </section>
+
+
+    <!-- VOLVER -->
+
+    <div class="navigation-buttons">
+
+        <button
+            id="backButton"
+            class="back-button"
+            type="button"
+        >
+            ← VOLVER AL MAPA
+        </button>
+
+    </div>
+
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+
+<script src="sesion.js"></script>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>

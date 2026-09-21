@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        El Misterio Maya - Crear Cuenta
+    </title>
+
+
+    <!--
+        ====================================================
+        REGISTRO - CONECTADO AL API
+        ====================================================
+
+        Este formulario llama a:
+
+        - GET  /api/paises   -> llena el <select> de país
+        - POST /api/registro -> crea la cuenta
+
+        La contraseña ya NO se guarda en localStorage.
+        Se envía tal cual al API por HTTPS, y es el
+        servidor (registro.js dentro de la carpeta api/)
+        quien la convierte en un hash antes de guardarla.
+        ====================================================
+    -->
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="game-container">
+
+
+        <div class="maya-symbol">
+            ☀
+        </div>
+
+
+        <section class="login-box">
+
+
+            <h1>
+                CREAR
+            </h1>
+
+            <h2>
+                CUENTA
+            </h2>
+
+            <p class="subtitle">
+                Únete a la aventura maya
+            </p>
+
+
+            <div class="divider"></div>
+
+
+            <!-- USUARIO -->
+
+            <div class="input-group">
+
+                <label for="regUsername">
+                    USUARIO
+                </label>
+
+                <input
+                    type="text"
+                    id="regUsername"
+                    placeholder="Elige un nombre de usuario"
+                    autocomplete="username"
+                    maxlength="20"
+                >
+
+            </div>
+
+
+            <!-- CONTRASEÑA -->
+
+            <div class="input-group">
+
+                <label for="regPassword">
+                    CONTRASEÑA
+                </label>
+
+                <input
+                    type="password"
+                    id="regPassword"
+                    placeholder="Mínimo 6 caracteres"
+                    autocomplete="new-password"
+                >
+
+            </div>
+
+
+            <!-- CONFIRMAR CONTRASEÑA -->
+
+            <div class="input-group">
+
+                <label for="regConfirmPassword">
+                    CONFIRMAR CONTRASEÑA
+                </label>
+
+                <input
+                    type="password"
+                    id="regConfirmPassword"
+                    placeholder="Repite tu contraseña"
+                    autocomplete="new-password"
+                >
+
+            </div>
+
+
+            <!-- EDAD -->
+
+            <div class="input-group">
+
+                <label for="regAge">
+                    EDAD
+                </label>
+
+                <input
+                    type="number"
+                    id="regAge"
+                    placeholder="Tu edad"
+                    min="1"
+                    max="120"
+                >
+
+            </div>
+
+
+            <!-- PAÍS -->
+
+            <div class="input-group">
+
+                <label for="regCountry">
+                    PAÍS
+                </label>
+
+                <select id="regCountry">
+
+                    <option value="" selected disabled>
+                        Selecciona tu país
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- BOTÓN CREAR CUENTA -->
+
+            <button
+                id="createAccountButton"
+                class="main-button"
+                type="button"
+            >
+                ⚔ CREAR GUERRERO
+            </button>
+
+
+            <!-- VOLVER AL LOGIN -->
+
+            <p class="link-text">
+                ¿Ya tienes cuenta?
+                <a href="index.html">Inicia sesión</a>
+            </p>
+
+
+            <!-- MENSAJE -->
+
+            <p
+                id="message"
+                aria-live="polite"
+            ></p>
+
+
+        </section>
+
+
+        <footer class="footer">
+            ✦ El conocimiento es el camino hacia el misterio ✦
+        </footer>
+
+
+    </main>
+
+
+    <script src="registro.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+
+    "SQL_SERVER": "tu-servidor.database.windows.net",
+    "SQL_DATABASE": "tu-base-de-datos",
+    "SQL_USER": "tu-usuario",
+    "SQL_PASSWORD": "tu-password"
+  }
+}
