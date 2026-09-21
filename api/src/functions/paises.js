@@ -50,7 +50,11 @@ app.http("paises", {
 
             return {
                 status: 500,
-                jsonBody: { error: "Error al obtener los países." }
+                jsonBody: {
+                    error: "Error al obtener los países.",
+                    /* TEMPORAL - quitar esta línea cuando ya funcione */
+                    detalle: error.message
+                }
             };
 
         }
