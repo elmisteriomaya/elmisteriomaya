@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Estadísticas - El Misterio Maya
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="statistics.css"
+    >
+
+</head>
+
+
+<body>
+
+<main class="statistics-container">
+
+
+    <!-- =====================================
+         ENCABEZADO
+    ====================================== -->
+
+    <header class="statistics-header">
+
+        <div class="statistics-logo">
+
+            <div class="sun">
+                ☀
+            </div>
+
+            <div>
+
+                <h1>
+                    EL MISTERIO MAYA
+                </h1>
+
+                <p>
+                    Reporte de seguridad
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="player-name">
+
+            👤
+
+            <span id="playerName">
+                Jugador
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================
+         TÍTULO
+    ====================================== -->
+
+    <section class="report-title">
+
+        <div class="report-icon">
+            📊
+        </div>
+
+        <div>
+
+            <h2>
+                ESTADÍSTICAS DEL JUGADOR
+            </h2>
+
+            <p>
+                Resultados de tus escenarios
+                de ingeniería social
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         RESUMEN GENERAL
+    ====================================== -->
+
+    <section
+        id="summary"
+        class="summary-grid"
+    >
+
+        <div class="stat-card">
+
+            <span class="stat-icon">
+                🎯
+            </span>
+
+            <div>
+
+                <small>
+                    ESCENARIOS EVALUADOS
+                </small>
+
+                <strong id="totalScenarios">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span class="stat-icon">
+                ✅
+            </span>
+
+            <div>
+
+                <small>
+                    IDENTIFICADOS
+                </small>
+
+                <strong id="detectedScenarios">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span class="stat-icon">
+                ⚠️
+            </span>
+
+            <div>
+
+                <small>
+                    INTERACCIONES RIESGOSAS
+                </small>
+
+                <strong id="compromisedScenarios">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span class="stat-icon">
+                📈
+            </span>
+
+            <div>
+
+                <small>
+                    SUSCEPTIBILIDAD
+                </small>
+
+                <strong id="susceptibility">
+                    0%
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         NIVEL DE SUSCEPTIBILIDAD
+    ====================================== -->
+
+    <section class="susceptibility-card">
+
+        <div
+            id="susceptibilityIcon"
+            class="susceptibility-icon"
+        >
+            🟢
+        </div>
+
+        <div>
+
+            <h3 id="susceptibilityTitle">
+                Sin resultados
+            </h3>
+
+            <p id="susceptibilityMessage">
+                Completa algunos escenarios
+                para generar tu reporte.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         RESULTADOS POR TIPO
+    ====================================== -->
+
+    <section class="report-section">
+
+        <div class="section-title">
+
+            <span>
+                📊
+            </span>
+
+            <h2>
+                RESULTADOS POR TIPO
+            </h2>
+
+        </div>
+
+
+        <div
+            id="attackResults"
+            class="attack-results"
+        >
+
+            <!-- JavaScript genera
+                 los resultados aquí -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         RECOMENDACIONES
+    ====================================== -->
+
+    <section class="report-section">
+
+        <div class="section-title">
+
+            <span>
+                💡
+            </span>
+
+            <h2>
+                RECOMENDACIONES
+            </h2>
+
+        </div>
+
+
+        <div
+            id="recommendations"
+            class="recommendations"
+        >
+
+            <p>
+                Completa algunos escenarios
+                para recibir recomendaciones.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         VOLVER
+    ====================================== -->
+
+    <div class="navigation-buttons">
+
+        <button
+            id="backButton"
+            class="back-button"
+        >
+            ← VOLVER AL MAPA
+        </button>
+
+    </div>
+
+
+</main>
+
+
+<script src="statistics.js"></script>
+
+<script src="sesion.js"></script>
+
+</body>
+
+</html>

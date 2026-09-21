@@ -1,0 +1,636 @@
+/* ========================================
+   EL MISTERIO MAYA
+   ESTADÍSTICAS
+======================================== */
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #263025,
+            #111611 70%
+        );
+
+    color:
+        #e5dfcf;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+}
+
+
+.statistics-container {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    margin: auto;
+
+    padding: 25px;
+
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.statistics-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        rgba(213, 185, 95, 0.25);
+
+}
+
+
+.statistics-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.statistics-logo h1 {
+
+    margin: 0;
+
+    color:
+        #d5b95f;
+
+    font-size: 20px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.statistics-logo p {
+
+    margin: 5px 0 0;
+
+    color:
+        #aaa593;
+
+    font-size: 12px;
+
+}
+
+
+.sun {
+
+    font-size: 32px;
+
+    color:
+        #d5b95f;
+
+}
+
+
+.player-name {
+
+    color:
+        #cfc8b5;
+
+    font-size: 14px;
+
+}
+
+
+/* ========================================
+   TÍTULO
+======================================== */
+
+.report-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin:
+        30px 0 20px;
+
+}
+
+
+.report-icon {
+
+    font-size: 38px;
+
+}
+
+
+.report-title h2 {
+
+    margin: 0;
+
+    color:
+        #d5b95f;
+
+    font-size: 22px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.report-title p {
+
+    margin:
+        6px 0 0;
+
+    color:
+        #aaa593;
+
+}
+
+
+/* ========================================
+   RESUMEN
+======================================== */
+
+.summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+}
+
+
+.stat-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        rgba(213, 185, 95, 0.25);
+
+    border-radius: 10px;
+
+    background:
+        rgba(30, 35, 29, 0.85);
+
+}
+
+
+.stat-icon {
+
+    font-size: 28px;
+
+}
+
+
+.stat-card small {
+
+    display: block;
+
+    color:
+        #9e9b8d;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.stat-card strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color:
+        #d5b95f;
+
+    font-size: 24px;
+
+}
+
+
+/* ========================================
+   SUSCEPTIBILIDAD
+======================================== */
+
+.susceptibility-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        rgba(213, 185, 95, 0.25);
+
+    border-radius: 10px;
+
+    background:
+        rgba(30, 35, 29, 0.85);
+
+}
+
+
+.susceptibility-icon {
+
+    font-size: 38px;
+
+}
+
+
+.susceptibility-card h3 {
+
+    margin: 0;
+
+    color:
+        #d5b95f;
+
+}
+
+
+.susceptibility-card p {
+
+    margin:
+        6px 0 0;
+
+    color:
+        #c3c0b3;
+
+    line-height:
+        1.5;
+
+}
+
+
+/* ========================================
+   SECCIONES
+======================================== */
+
+.report-section {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        rgba(213, 185, 95, 0.20);
+
+    border-radius: 10px;
+
+    background:
+        rgba(30, 35, 29, 0.75);
+
+}
+
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.section-title span {
+
+    font-size: 22px;
+
+}
+
+
+.section-title h2 {
+
+    margin: 0;
+
+    color:
+        #d5b95f;
+
+    font-size: 15px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ========================================
+   RESULTADOS POR ATAQUE
+======================================== */
+
+.attack-results {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+.attack-row {
+
+    display: grid;
+
+    grid-template-columns:
+        170px 1fr 100px;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.attack-name {
+
+    color:
+        #d6d1c2;
+
+    font-size: 13px;
+
+}
+
+
+.progress-background {
+
+    width: 100%;
+
+    height: 12px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #75602e,
+            #d5b95f
+        );
+
+    transition:
+        width 0.6s ease;
+
+}
+
+
+.attack-percentage {
+
+    color:
+        #d5b95f;
+
+    font-size: 12px;
+
+    text-align: right;
+
+}
+
+
+/* ========================================
+   RECOMENDACIONES
+======================================== */
+
+.recommendations {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.recommendation {
+
+    padding:
+        14px 16px;
+
+    border-left:
+        3px solid
+        #a98b42;
+
+    background:
+        rgba(169,139,66,0.08);
+
+    color:
+        #d5d0c1;
+
+    line-height:
+        1.6;
+
+}
+
+
+.recommendation strong {
+
+    color:
+        #d5b95f;
+
+}
+
+
+/* ========================================
+   BOTÓN VOLVER
+======================================== */
+
+.navigation-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 25px;
+
+}
+
+
+.back-button {
+
+    padding:
+        13px 25px;
+
+    border:
+        1px solid
+        #8e7638;
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(30,35,29,0.9);
+
+    color:
+        #d5b95f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-weight:
+        bold;
+
+    letter-spacing:
+        1px;
+
+    cursor:
+        pointer;
+
+}
+
+
+.back-button:hover {
+
+    border-color:
+        #d5b95f;
+
+    background:
+        rgba(50,55,45,0.9);
+
+}
+
+
+/* ========================================
+   SIN RESULTADOS
+======================================== */
+
+.no-results {
+
+    padding:
+        25px;
+
+    color:
+        #aaa593;
+
+    text-align:
+        center;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (
+    max-width: 800px
+) {
+
+    .summary-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (
+    max-width: 600px
+) {
+
+    .statistics-header {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .summary-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .attack-row {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 7px;
+
+    }
+
+
+    .attack-percentage {
+
+        text-align:
+            left;
+
+    }
+
+}

@@ -1,0 +1,437 @@
+/* ========================================
+   EL MISTERIO MAYA
+   DISCLAIMER
+======================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            #29452c 0%,
+            #18341f 35%,
+            #0b1d12 75%,
+            #06110b 100%
+        );
+
+    color: #eee;
+
+}
+
+
+/* ========================================
+   CONTENEDOR
+======================================== */
+
+.disclaimer-container {
+
+    min-height: 100vh;
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 20px;
+
+}
+
+
+/* ========================================
+   SÍMBOLO MAYA
+======================================== */
+
+.maya-symbol {
+
+    width: 70px;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border:
+        2px solid
+        #d5b95f;
+
+    border-radius: 50%;
+
+    color: #d5b95f;
+
+    font-size: 34px;
+
+    background:
+        rgba(213,185,95,0.08);
+
+}
+
+
+/* ========================================
+   TARJETA
+======================================== */
+
+.disclaimer-card {
+
+    width: min(
+        100%,
+        620px
+    );
+
+    padding: 35px;
+
+    text-align: center;
+
+    border:
+        1px solid
+        rgba(213,185,95,0.65);
+
+    border-radius: 14px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(43,52,35,0.98),
+            rgba(20,29,19,0.98)
+        );
+
+    box-shadow:
+
+        0 15px 45px
+        rgba(0,0,0,0.5),
+
+        0 0 25px
+        rgba(213,185,95,0.08);
+
+}
+
+
+/* ========================================
+   TÍTULO
+======================================== */
+
+.disclaimer-card h1 {
+
+    color: #d5b95f;
+
+    font-size: 30px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.disclaimer-card h2 {
+
+    margin-top: 3px;
+
+    color: #d5b95f;
+
+    font-size: 23px;
+
+    letter-spacing: 8px;
+
+    font-weight: normal;
+
+}
+
+
+/* ========================================
+   DIVISOR
+======================================== */
+
+.divider {
+
+    width: 70%;
+
+    height: 1px;
+
+    margin: 20px auto;
+
+    background:
+
+        linear-gradient(
+            to right,
+            transparent,
+            #8e7638,
+            transparent
+        );
+
+}
+
+
+/* ========================================
+   ICONO
+======================================== */
+
+.disclaimer-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* ========================================
+   SUBTÍTULO
+======================================== */
+
+.disclaimer-card h3 {
+
+    color: #d5b95f;
+
+    font-size: 18px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* ========================================
+   TEXTO
+======================================== */
+
+.disclaimer-card p {
+
+    color: #c7c7b5;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 14px;
+
+}
+
+
+.disclaimer-card strong {
+
+    color: #d5b95f;
+
+}
+
+
+/* ========================================
+   BIENVENIDA
+======================================== */
+
+.welcome {
+
+    font-size: 16px !important;
+
+}
+
+
+/* ========================================
+   INFORMACIÓN IMPORTANTE
+======================================== */
+
+.important-box {
+
+    text-align: left;
+
+    margin:
+
+        20px 0;
+
+    padding:
+
+        16px 18px;
+
+    border-left:
+
+        3px solid
+        #b99b4b;
+
+    background:
+
+        rgba(0,0,0,0.18);
+
+}
+
+
+.important-box h4 {
+
+    color: #d5b95f;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.important-box p {
+
+    margin-bottom: 8px;
+
+    font-size: 13px;
+
+}
+
+
+.important-box p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* ========================================
+   CONSENTIMIENTO
+======================================== */
+
+.consent-text {
+
+    color: #aaa987 !important;
+
+    font-size: 13px !important;
+
+}
+
+
+/* ========================================
+   BOTÓN
+======================================== */
+
+#acceptButton {
+
+    width: 100%;
+
+    padding: 14px 20px;
+
+    margin-top: 5px;
+
+    border:
+
+        1px solid
+        #d5b95f;
+
+    border-radius: 8px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #5b4d25,
+            #3b3219
+        );
+
+    color: #f3e7b0;
+
+    font-family:
+
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+
+        transform 0.2s,
+
+        box-shadow 0.2s;
+
+}
+
+
+#acceptButton:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+
+        0 5px 20px
+        rgba(213,185,95,0.25);
+
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+
+    margin-top: 18px;
+
+    color: #777c6c;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .disclaimer-card {
+
+        padding: 25px 20px;
+
+    }
+
+    .disclaimer-card h1 {
+
+        font-size: 25px;
+
+    }
+
+    .disclaimer-card h2 {
+
+        font-size: 20px;
+
+    }
+
+}
