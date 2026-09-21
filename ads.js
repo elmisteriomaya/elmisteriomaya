@@ -1,6 +1,13 @@
 /* ========================================
    EL MISTERIO MAYA
    SISTEMA DE ESCENARIOS DE SEGURIDAD
+   ========================================
+
+   Los escenarios se cargan desde
+   GET /api/escenarios (con respaldo local
+   si el API falla), y cada resultado se
+   manda a POST /api/resultados además de
+   guardarse en localStorage.
 ======================================== */
 
 
@@ -355,6 +362,124 @@ const securityScenarios = [
 
 
 /* ========================================
+   CARGAR ESCENARIOS DESDE EL API
+   ========================================
+
+   securityScenarios ya trae los 15 casos
+   escritos a mano (respaldo). Si el API
+   responde bien, se REEMPLAZAN por los que
+   vienen de la tabla Escenarios.
+
+   Si el API falla (sin internet, base de
+   datos caída, etc.), se quedan los 15 de
+   respaldo y el juego sigue funcionando.
+
+   scenariosReady se usa en showAdAfterLevel()
+   para esperar a que esto termine antes de
+   mostrar el primer escenario.
+======================================== */
+
+const scenariosReady =
+    (async function loadScenariosFromAPI() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/escenarios"
+                );
+
+            if (
+                !response.ok
+            ) {
+
+                throw new Error(
+                    "Respuesta no válida del API."
+                );
+
+            }
+
+            const data =
+                await response.json();
+
+
+            if (
+                !Array.isArray(data) ||
+                data.length === 0
+            ) {
+
+                throw new Error(
+                    "El API no devolvió escenarios."
+                );
+
+            }
+
+
+            const mapped =
+                data.map(
+                    function (row) {
+
+                        return {
+
+                            id:
+                                row.EscenarioID,
+
+                            type:
+                                row.TipoAtaque,
+
+                            difficulty:
+                                row.Dificultad,
+
+                            icon:
+                                row.Icono,
+
+                            title:
+                                row.Titulo,
+
+                            message:
+                                row.Mensaje,
+
+                            action:
+                                row.TextoAccion,
+
+                            recommendation:
+                                row.Recomendacion
+
+                        };
+
+                    }
+                );
+
+
+            /*
+                Reemplazar el contenido del
+                arreglo SIN cambiar la
+                referencia (getRandomScenario
+                ya apunta a esta misma
+                constante securityScenarios).
+            */
+
+            securityScenarios.length = 0;
+
+            securityScenarios.push(
+                ...mapped
+            );
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "No se pudieron cargar los escenarios desde el API. Usando los escenarios de respaldo.",
+                error
+            );
+
+        }
+
+    })();
+
+
+/* ========================================
    ELEMENTOS DEL ESCENARIO
 ======================================== */
 
@@ -587,6 +712,77 @@ function saveScenarioResult(
             results
         )
     );
+
+
+    /*
+        Enviar también al API.
+
+        No usamos "await" aquí a propósito:
+        no queremos que el jugador tenga que
+        esperar a la red para ver el resultado
+        en pantalla (showScenarioResult se
+        llama justo después de esto).
+
+        Si el jugador entró con el login viejo
+        (sin API) y no existe "mayaJugadorId",
+        simplemente no se manda nada al API;
+        el resultado igual queda guardado en
+        localStorage como respaldo.
+    */
+
+    const jugadorId =
+        localStorage.getItem(
+            "mayaJugadorId"
+        );
+
+
+    if (
+        jugadorId
+    ) {
+
+        fetch(
+            "/api/resultados",
+            {
+                method:
+                    "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify({
+
+                        jugadorId:
+                            parseInt(jugadorId),
+
+                        escenarioId:
+                            scenario.id,
+
+                        resultado:
+                            result,
+
+                        nivelJuego:
+                            typeof currentLevel !==
+                            "undefined"
+                                ? currentLevel
+                                : null
+
+                    })
+            }
+        ).catch(
+            function (error) {
+
+                console.warn(
+                    "No se pudo guardar el resultado en el API.",
+                    error
+                );
+
+            }
+        );
+
+    }
 
 }
 
@@ -867,6 +1063,14 @@ function showAdAfterLevel() {
         canShowAd().
     */
 
-    return showAd();
+    return (
+        scenariosReady.then(
+            function () {
+
+                return showAd();
+
+            }
+        )
+    );
 
 }
