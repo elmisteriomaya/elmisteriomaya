@@ -1,6 +1,6 @@
 /* ========================================================
    EL MISTERIO MAYA - API
-   GET /api/admin/estadisticas
+   GET /api/estadisticas-admin
    ========================================================
 
    Reemplaza a getSecurityResults() en admin.js, que hoy
@@ -33,7 +33,7 @@ app.http("estadisticas", {
 
     authLevel: "anonymous",
 
-    route: "admin/estadisticas",
+    route: "estadisticas-admin",
 
     handler: async function (request, context) {
 

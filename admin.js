@@ -245,7 +245,7 @@ async function fetchAdminStats() {
 
     const response =
         await fetch(
-            "/api/admin/estadisticas"
+            "/api/estadisticas-admin"
         );
 
     if (
