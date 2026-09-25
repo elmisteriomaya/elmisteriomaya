@@ -159,7 +159,11 @@ app.http("estadisticas", {
 
             return {
                 status: 500,
-                jsonBody: { error: "Error al obtener las estadísticas." }
+                jsonBody: {
+                    error: "Error al obtener las estadísticas.",
+                    /* TEMPORAL - quitar esta línea cuando ya funcione */
+                    detalle: error.message
+                }
             };
 
         }
