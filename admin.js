@@ -176,10 +176,6 @@ const RESULT_COLOR_DANGER =
    ACCESO DE ADMINISTRADOR
 ======================================== */
 
-/* ========================================
-   ACCESO DE ADMINISTRADOR
-======================================== */
-
 function checkAdminAccess() {
 
     if (
@@ -242,22 +238,27 @@ backButton.addEventListener(
 
 
 /* ========================================
-   OBTENER DATOS
-
-   TEMPORAL: se leen de localStorage.
-
-   Cuando exista el API, esta es la
-   única función que debería cambiar
-   (reemplazar por un fetch al backend).
+   OBTENER DATOS DESDE EL API
 ======================================== */
 
-function getSecurityResults() {
+async function fetchAdminStats() {
 
-    return JSON.parse(
-        localStorage.getItem(
-            "mayaSecurityResults"
-        ) || "[]"
-    );
+    const response =
+        await fetch(
+            "/api/admin/estadisticas"
+        );
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            "No se pudieron cargar las estadísticas."
+        );
+
+    }
+
+    return await response.json();
 
 }
 
@@ -266,74 +267,37 @@ function getSecurityResults() {
    RESUMEN GENERAL (KPI)
 ======================================== */
 
-function calculateGlobalSummary(
-    results
+function renderKPIs(
+    stats
 ) {
-
-    const players =
-        new Set(
-            results.map(
-                result => result.player
-            )
-        );
-
-
-    const total =
-        results.length;
-
-
-    const compromised =
-        results.filter(
-            result =>
-                result.result ===
-                "compromised"
-        ).length;
-
 
     let percentage = 0;
 
 
     if (
-        total > 0
+        stats.totalEscenarios > 0
     ) {
 
         percentage =
             (
-                compromised / total
+                stats.totalComprometidos /
+                stats.totalEscenarios
             ) * 100;
 
     }
 
 
-    return {
-
-        totalPlayers:
-            players.size,
-
-        total,
-        compromised,
-        percentage
-
-    };
-
-}
-
-
-function renderKPIs(
-    summary
-) {
-
     kpiPlayers.textContent =
-        summary.totalPlayers;
+        stats.totalJugadores;
 
     kpiScenarios.textContent =
-        summary.total;
+        stats.totalEscenarios;
 
     kpiCompromised.textContent =
-        summary.compromised;
+        stats.totalComprometidos;
 
     kpiSusceptibility.textContent =
-        `${summary.percentage.toFixed(1)}%`;
+        `${percentage.toFixed(1)}%`;
 
 }
 
@@ -347,7 +311,7 @@ let techniquesChartInstance =
 
 
 function renderTechniquesChart(
-    results
+    porTecnica
 ) {
 
     const types =
@@ -356,15 +320,32 @@ function renderTechniquesChart(
         );
 
 
+    /*
+        porTecnica solo trae los tipos que
+        ya tienen al menos un resultado.
+        Buscamos cada tipo conocido ahí,
+        y si no aparece, usamos 0.
+    */
+
+    function findTechnique(
+        type
+    ) {
+
+        return porTecnica.find(
+            row => row.TipoAtaque === type
+        );
+
+    }
+
+
     const detectedData =
         types.map(
             function (type) {
 
-                return results.filter(
-                    result =>
-                        result.type === type &&
-                        result.result === "detected"
-                ).length;
+                const row =
+                    findTechnique(type);
+
+                return row ? row.Detectado : 0;
 
             }
         );
@@ -374,11 +355,10 @@ function renderTechniquesChart(
         types.map(
             function (type) {
 
-                return results.filter(
-                    result =>
-                        result.type === type &&
-                        result.result === "compromised"
-                ).length;
+                const row =
+                    findTechnique(type);
+
+                return row ? row.Comprometido : 0;
 
             }
         );
@@ -499,7 +479,7 @@ let categoriesChartInstance =
 
 
 function renderCategoriesChart(
-    results
+    porTecnica
 ) {
 
     const types =
@@ -512,9 +492,23 @@ function renderCategoriesChart(
         types.map(
             function (type) {
 
-                return results.filter(
-                    result => result.type === type
-                ).length;
+                const row =
+                    porTecnica.find(
+                        item => item.TipoAtaque === type
+                    );
+
+                if (
+                    !row
+                ) {
+
+                    return 0;
+
+                }
+
+                return (
+                    row.Detectado +
+                    row.Comprometido
+                );
 
             }
         );
@@ -696,29 +690,6 @@ let compromisedResultsCache =
     [];
 
 
-function buildCompromisedList(
-    results
-) {
-
-    return results
-        .filter(
-            result =>
-                result.result === "compromised"
-        )
-        .sort(
-            function (a, b) {
-
-                return (
-                    new Date(b.timestamp) -
-                    new Date(a.timestamp)
-                );
-
-            }
-        );
-
-}
-
-
 function renderCompromisedTable() {
 
     const total =
@@ -790,25 +761,25 @@ function renderCompromisedTable() {
             row.innerHTML = `
 
                 <td class="player-cell">
-                    ${item.player}
+                    ${item.Jugador}
                 </td>
 
                 <td>
-                    ${formatDate(item.timestamp)}
+                    ${formatDate(item.Fecha)}
                 </td>
 
                 <td>
-                    ${item.location || "No especificada"}
+                    ${item.Ubicacion || "No especificada"}
                 </td>
 
                 <td>
                     <span class="technique-badge">
-                        ${attackNames[item.type] || item.type}
+                        ${attackNames[item.Tecnica] || item.Tecnica}
                     </span>
                 </td>
 
                 <td>
-                    ${item.level ?? "—"}
+                    ${item.Nivel ?? "—"}
                 </td>
 
             `;
@@ -901,41 +872,52 @@ function renderPagination(
    INICIALIZAR PANEL
 ======================================== */
 
-function initializeAdminPanel() {
+async function initializeAdminPanel() {
 
-    const results =
-        getSecurityResults();
+    try {
+
+        const stats =
+            await fetchAdminStats();
 
 
-    const summary =
-        calculateGlobalSummary(
-            results
+        renderKPIs(
+            stats
         );
 
 
-    renderKPIs(
-        summary
-    );
-
-
-    renderTechniquesChart(
-        results
-    );
-
-
-    renderCategoriesChart(
-        results
-    );
-
-
-    compromisedResultsCache =
-        buildCompromisedList(
-            results
+        renderTechniquesChart(
+            stats.porTecnica
         );
 
-    currentPage = 1;
 
-    renderCompromisedTable();
+        renderCategoriesChart(
+            stats.porTecnica
+        );
+
+
+        compromisedResultsCache =
+            stats.interaccionesRiesgosas;
+
+        currentPage = 1;
+
+        renderCompromisedTable();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+        tableEmptyMessage.textContent =
+            "No se pudieron cargar los datos. Intenta recargar la página.";
+
+        tableEmptyMessage.classList.remove(
+            "hidden"
+        );
+
+    }
 
 }
 
